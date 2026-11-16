@@ -20,11 +20,10 @@ Entry and exit days both count, and days where trips overlap are only counted on
 
 ## Getting the app on your phone
 
-Every push to GitHub builds the app automatically:
+**[Download SchengenTracker.apk](https://github.com/chipsandmayo/Schengen-tracker/releases/latest/download/SchengenTracker.apk)**
 
-1. Open the **Actions** tab of this repo and click the latest **Build APK** run.
-2. Download the **schengen-tracker-apk** artifact (a zip), and unzip it to get `app-debug.apk`.
-3. Copy it to your Android phone and open it. You'll need to allow installing apps from that source.
+Open the link on your Android phone, then open the downloaded file. You'll need to allow
+installing apps from your browser. Every push to `main` rebuilds the app and updates this link.
 
 Or open the project in Android Studio and press Run.
 

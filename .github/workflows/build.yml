@@ -4,6 +4,9 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,3 +27,17 @@ jobs:
         with:
           name: schengen-tracker-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      # Publish the APK as a release so it has a permanent direct download link:
+      # https://github.com/<owner>/<repo>/releases/latest/download/SchengenTracker.apk
+      - name: Publish release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk SchengenTracker.apk
+          gh release delete latest --cleanup-tag --yes || true
+          gh release create latest SchengenTracker.apk \
+            --title "Schengen Tracker (latest)" \
+            --notes "Built from ${GITHUB_SHA::7}. Download SchengenTracker.apk and open it on your Android phone." \
+            --target "$GITHUB_SHA" --latest
